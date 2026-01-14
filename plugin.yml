@@ -1,0 +1,24 @@
+name: ExamplePlugin
+version: 1.0.0
+main: me.squishyslime.example.Main
+description: An example plugin
+author: SquishySlime
+website: https://skwaraa.online
+api-version: '1.21'
+
+commands:
+  fly:
+    description: Gives you the ability to fly.
+  vanish:
+    description: Allows you to hide from other players.
+  pickup:
+    description: Allows you to disable/enable picking up items.
+  invsee:
+    description: Allows you to see another player's inventory.
+  balance:
+    description: Allows you to check your or another player's balance.
+    aliases:
+      - bal
+      - money
+  eco:
+    description: Allows you to change another player's balance.
