@@ -5,11 +5,6 @@ import java.util.UUID;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.squishyslime.minecore.commands.BalanceCommand;
-import me.squishyslime.minecore.commands.FlyCommand;
-import me.squishyslime.minecore.commands.InvseeCommand;
-import me.squishyslime.minecore.commands.PickupCommand;
-import me.squishyslime.minecore.commands.VanishCommand;
 import me.squishyslime.minecore.listener.Listener;
 import me.squishyslime.minecore.utils.EconomyManager;
 import me.squishyslime.minecore.utils.HistoryManager;
@@ -31,6 +26,5 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Listener(this), this);
 		
 		reg.register();
-		
 	}
 }
