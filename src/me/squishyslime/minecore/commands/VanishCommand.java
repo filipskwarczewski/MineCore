@@ -1,4 +1,4 @@
-package me.squishyslime.example.commands;
+package me.squishyslime.minecore.commands;
 
 import java.util.UUID;
 
@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import me.squishyslime.example.Main;
+import me.squishyslime.minecore.Main;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 
@@ -45,7 +45,9 @@ public class VanishCommand implements CommandExecutor {
 				plugin.vanishedPlayers.add(targetUUID);
 				plugin.canPickup.add(targetUUID);
 				for(Player p : Bukkit.getOnlinePlayers()) {
-					p.hidePlayer(plugin,target);
+					if(!p.hasPermission("example.vanish.see")) {
+						p.hidePlayer(plugin,target);
+					}
 				}
 				target.sendMessage(Component.text("You are now invisible!",TextColor.color(0x39db64)));
 				sender.sendMessage(Component.text(target.getName() + " is now invisible!",TextColor.color(0x39db64)));

@@ -1,4 +1,4 @@
-package me.squishyslime.example.commands;
+package me.squishyslime.minecore.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;

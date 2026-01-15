@@ -1,4 +1,4 @@
-package me.squishyslime.example.commands;
+package me.squishyslime.minecore.commands;
 
 import java.util.UUID;
 
@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import me.squishyslime.example.Main;
+import me.squishyslime.minecore.Main;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 

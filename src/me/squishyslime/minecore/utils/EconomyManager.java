@@ -1,4 +1,4 @@
-package me.squishyslime.example.utils;
+package me.squishyslime.minecore.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import me.squishyslime.example.Main;
+import me.squishyslime.minecore.Main;
 
 public class EconomyManager {
 	

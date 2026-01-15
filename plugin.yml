@@ -1,7 +1,7 @@
-name: ExamplePlugin
+name: MineCore
 version: 1.0.0
-main: me.squishyslime.example.Main
-description: An example plugin
+main: me.squishyslime.minecore.Main
+description: An utility plugin designed to ease the managing of a Minecraft server.
 author: SquishySlime
 website: https://skwaraa.online
 api-version: '1.21'

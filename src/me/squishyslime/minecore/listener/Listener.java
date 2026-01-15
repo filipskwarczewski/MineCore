@@ -1,15 +1,19 @@
-package me.squishyslime.example.listener;
+package me.squishyslime.minecore.listener;
 
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import me.squishyslime.example.Main;
+import me.squishyslime.minecore.Main;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 
@@ -62,6 +66,16 @@ public class Listener implements org.bukkit.event.Listener {
 		UUID playerUUID = p.getUniqueId();
 		if(plugin.canPickup.contains(playerUUID)) {
 			e.setCancelled(true);
+		}
+	}
+	
+	@EventHandler
+	public void onAction(PlayerInteractEvent e) {
+		if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			Player p = e.getPlayer();
+			if(e.getItem().getType() == Material.FIRE_CHARGE) {
+				p.launchProjectile(Fireball.class);
+			}
 		}
 	}
 }
