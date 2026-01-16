@@ -1,7 +1,7 @@
 /gm - done
-/heal
-/feed
-/repair
+/heal - done
+/feed - done
+/repair - done
 /workbench
 /enderchest
 /god

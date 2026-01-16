@@ -6,11 +6,14 @@ import me.squishyslime.minecore.commands.FlyCommand;
 import me.squishyslime.minecore.commands.GamemodeCommand;
 import me.squishyslime.minecore.commands.InvseeCommand;
 import me.squishyslime.minecore.commands.PickupCommand;
+import me.squishyslime.minecore.commands.RepairCommand;
 import me.squishyslime.minecore.commands.VanishCommand;
+import me.squishyslime.minecore.commands.feedCommand;
+import me.squishyslime.minecore.commands.healCommand;
 
-public class registerCommands {
+public class RegisterCommands {
 	private Main plugin;
-	public registerCommands(Main plugin) {
+	public RegisterCommands(Main plugin) {
 		this.plugin = plugin;
 	}
 	
@@ -20,7 +23,9 @@ public class registerCommands {
 		plugin.getCommand("pickup").setExecutor(new PickupCommand(plugin));
 		plugin.getCommand("invsee").setExecutor(new InvseeCommand());
 		plugin.getCommand("balance").setExecutor(new BalanceCommand(plugin));
-		plugin.getCommand("gm").setExecutor(new GamemodeCommand());;	
-		
-	}
+		plugin.getCommand("gm").setExecutor(new GamemodeCommand());	
+		plugin.getCommand("heal").setExecutor(new healCommand());
+		plugin.getCommand("feed").setExecutor(new feedCommand());
+		plugin.getCommand("repair").setExecutor(new RepairCommand());;
+		}
 }

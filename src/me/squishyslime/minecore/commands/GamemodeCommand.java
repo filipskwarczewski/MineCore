@@ -16,93 +16,118 @@ import org.jetbrains.annotations.Nullable;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 
-public class GamemodeCommand implements CommandExecutor,TabCompleter {
+public class GamemodeCommand implements CommandExecutor, TabCompleter {
 
-	@Override
-	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
-			@NotNull String @NotNull [] args) {
-		if(!sender.hasPermission("minecore.gm")) {
-			sender.sendMessage(Component.text("You don't have permission to execute this command!",TextColor.color(0xe0523f)));
-			return false;
-		}
-		if(args.length != 1 || args.length != 2) {
-			sender.sendMessage(Component.text("Usage: /gm <0/1/2/3/> or <s/c/a/sp> <player>",TextColor.color(0xe0523f)));
-			return false;
-		}
-		if(args.length == 1) {
-			if(!(sender instanceof Player)) {
-				sender.sendMessage(Component.text("You need to be a player to use this command or specify a player!",TextColor.color(0xe0523f)));
-				return false;
-			}
-			Player p = (Player) sender;
-			String gamemode = args[0];
-			switch(gamemode) {
-			case "0", "s","survival":
-				p.setGameMode(GameMode.SURVIVAL);
-				p.sendMessage(Component.text("Set your gamemode to survival!",TextColor.color(0x39db64)));
-			case "1", "c","creative":
-				p.setGameMode(GameMode.CREATIVE);
-				p.sendMessage(Component.text("Set your gamemode to creative!",TextColor.color(0x39db64)));
-			case "2","a","adventure":
-				p.setGameMode(GameMode.ADVENTURE);
-				p.sendMessage(Component.text("Set your gamemode to adventure!",TextColor.color(0x39db64)));
-			case "3","sp","spectator":
-				p.setGameMode(GameMode.SPECTATOR);
-				p.sendMessage(Component.text("Set your gamemode to spectator!",TextColor.color(0x39db64)));
-			default:
-				p.sendMessage(Component.text("Usage: /gm <0/1/2/3/> or <s/c/a/sp> <player>",TextColor.color(0xe0523f)));
-				
-			}
-		}
-		if(args.length == 2) {
-			Player p = Bukkit.getPlayerExact(args[1]);
-			if(p == null) {
-				sender.sendMessage(Component.text("That player doesn't exist!",TextColor.color(0x39db64)));
-				return false;
-			}
-			String gamemode = args[0];
-			switch(gamemode) {
-			case "0", "s","survival":
-				p.setGameMode(GameMode.SURVIVAL);
-				p.sendMessage(Component.text("Set your gamemode to survival!",TextColor.color(0x39db64)));
-				sender.sendMessage(Component.text("Set " + p.getName() + "'s gamemode to survival!",TextColor.color(0x39db64)));
-			case "1", "c","creative":
-				p.setGameMode(GameMode.CREATIVE);
-				p.sendMessage(Component.text("Set your gamemode to creative!",TextColor.color(0x39db64)));
-				sender.sendMessage(Component.text("Set " + p.getName() + "'s gamemode to creative!",TextColor.color(0x39db64)));
-			case "2","a","adventure":
-				p.setGameMode(GameMode.ADVENTURE);
-				p.sendMessage(Component.text("Set your gamemode to adventure!",TextColor.color(0x39db64)));
-				sender.sendMessage(Component.text("Set " + p.getName() + "'s gamemode to adventure!",TextColor.color(0x39db64)));
-			case "3","sp","spectator":
-				p.setGameMode(GameMode.SPECTATOR);
-				p.sendMessage(Component.text("Set your gamemode to spectator!",TextColor.color(0x39db64)));
-				sender.sendMessage(Component.text("Set " + p.getName() + "'s gamemode to spectator!",TextColor.color(0x39db64)));
-			default:
-				p.sendMessage(Component.text("Usage: /gm <0/1/2/3/> or <s/c/a/sp> <player>",TextColor.color(0xe0523f)));
-				
-			}
-		}
-		return false;
-	}
+    private static final TextColor ERROR = TextColor.color(0xe0523f);
+    private static final TextColor SUCCESS = TextColor.color(0x39db64);
 
-	@Override
-	public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
-			@NotNull String label, @NotNull String @NotNull [] args) {
-		if(args.length == 1) {
-			if(sender.hasPermission("minecore.gm")) {
-				return List.of("0","1","2","3","s","c","a","sp","survival","creative","adventure","spectator");
-			}
-		}
-		if(args.length == 2) {
-			ArrayList<String> onlinePlayers = new ArrayList<>();
-			if(sender.hasPermission("minecore.gm")) {
-				for(Player pO : Bukkit.getOnlinePlayers()) {
-					onlinePlayers.add(pO.getName());
-				}
-			}
-		}
-		return null;
-	}
+    @Override
+    public boolean onCommand(
+            @NotNull CommandSender sender,
+            @NotNull Command command,
+            @NotNull String label,
+            @NotNull String[] args
+    ) {
 
+        if (!sender.hasPermission("minecore.gm")) {
+            sender.sendMessage(Component.text(
+                    "You don't have permission to execute this command!",
+                    ERROR
+            ));
+            return true;
+        }
+
+        if (args.length != 1 && args.length != 2) {
+            sender.sendMessage(Component.text(
+                    "Usage: /gm <0/1/2/3|s/c/a/sp> [player]",
+                    ERROR
+            ));
+            return true;
+        }
+
+        Player target;
+
+        if (args.length == 2) {
+            target = Bukkit.getPlayerExact(args[1]);
+            if (target == null) {
+                sender.sendMessage(Component.text(
+                        "That player doesn't exist!",
+                        ERROR
+                ));
+                return true;
+            }
+        } else {
+            if (!(sender instanceof Player)) {
+                sender.sendMessage(Component.text(
+                        "You must specify a player from console!",
+                        ERROR
+                ));
+                return true;
+            }
+            target = (Player) sender;
+        }
+
+        GameMode gameMode = switch (args[0].toLowerCase()) {
+            case "0", "s", "survival" -> GameMode.SURVIVAL;
+            case "1", "c", "creative" -> GameMode.CREATIVE;
+            case "2", "a", "adventure" -> GameMode.ADVENTURE;
+            case "3", "sp", "spectator" -> GameMode.SPECTATOR;
+            default -> null;
+        };
+
+        if (gameMode == null) {
+            sender.sendMessage(Component.text(
+                    "Invalid gamemode!",
+                    ERROR
+            ));
+            return true;
+        }
+
+        target.setGameMode(gameMode);
+
+        target.sendMessage(Component.text(
+                "Your gamemode has been set to " + gameMode.name().toLowerCase() + "!",
+                SUCCESS
+        ));
+
+        if (sender != target) {
+            sender.sendMessage(Component.text(
+                    "Set " + target.getName() + "'s gamemode to " + gameMode.name().toLowerCase() + "!",
+                    SUCCESS
+            ));
+        }
+
+        return true;
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(
+            @NotNull CommandSender sender,
+            @NotNull Command command,
+            @NotNull String label,
+            @NotNull String[] args
+    ) {
+
+        if (!sender.hasPermission("minecore.gm")) {
+            return null;
+        }
+
+        if (args.length == 1) {
+            return List.of(
+                    "0", "1", "2", "3",
+                    "s", "c", "a", "sp",
+                    "survival", "creative", "adventure", "spectator"
+            );
+        }
+
+        if (args.length == 2) {
+            List<String> players = new ArrayList<>();
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                players.add(p.getName());
+            }
+            return players;
+        }
+
+        return null;
+    }
 }

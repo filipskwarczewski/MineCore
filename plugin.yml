@@ -26,3 +26,9 @@ commands:
     description: Allows you to change your or another player's gamemode.
     aliases:
       - gamemode
+  heal:
+    description: Allows you to heal.
+  feed:
+    description: Allows you to feed.
+  repair:
+    description: Allows you to repair all the items in your inventory.
