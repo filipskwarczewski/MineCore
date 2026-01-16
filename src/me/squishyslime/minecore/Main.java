@@ -13,9 +13,11 @@ import me.squishyslime.minecore.utils.registerCommands;
 public class Main extends JavaPlugin {
 	public HashSet<UUID> vanishedPlayers = new HashSet<>();
 	public HashSet<UUID> canPickup = new HashSet<>();
+	
 	public EconomyManager em;
 	public registerCommands reg;
 	public HistoryManager hm;
+	
 	@Override
 	public void onEnable() {
 		getLogger().info("MineCore has started!");

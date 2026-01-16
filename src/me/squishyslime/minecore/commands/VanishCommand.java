@@ -22,7 +22,7 @@ public class VanishCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
 			@NotNull String @NotNull [] args) {
-		if(!sender.hasPermission("example.vanish")) {
+		if(!sender.hasPermission("minecore.vanish")) {
 			sender.sendMessage(Component.text("You don't have permission to execute this command!",TextColor.color(0xe0523f)));
 			return false;
 		}
@@ -45,7 +45,7 @@ public class VanishCommand implements CommandExecutor {
 				plugin.vanishedPlayers.add(targetUUID);
 				plugin.canPickup.add(targetUUID);
 				for(Player p : Bukkit.getOnlinePlayers()) {
-					if(!p.hasPermission("example.vanish.see")) {
+					if(!p.hasPermission("minecore.vanish.see")) {
 						p.hidePlayer(plugin,target);
 					}
 				}

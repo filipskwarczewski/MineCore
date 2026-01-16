@@ -22,3 +22,7 @@ commands:
       - money
   eco:
     description: Allows you to change another player's balance.
+  gm:
+    description: Allows you to change your or another player's gamemode.
+    aliases:
+      - gamemode

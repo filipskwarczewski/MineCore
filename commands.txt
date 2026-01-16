@@ -1,4 +1,4 @@
-/gm
+/gm - done
 /heal
 /feed
 /repair

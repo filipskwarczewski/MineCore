@@ -20,7 +20,7 @@ public class InvseeCommand implements CommandExecutor {
 			sender.sendMessage(Component.text("You need to be a player to execute this command.",TextColor.color(0xe0523f)));
 			return false;
 		}
-		if(!sender.hasPermission("example.invsee")) {
+		if(!sender.hasPermission("minecore.invsee")) {
 			sender.sendMessage(Component.text("You don't have permission to execute this command.",TextColor.color(0xe0523f)));
 			return false;
 		}

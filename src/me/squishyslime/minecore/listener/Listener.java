@@ -30,7 +30,7 @@ public class Listener implements org.bukkit.event.Listener {
 		if(plugin.vanishedPlayers.contains(playerUUID)) {
 			e.joinMessage(null);
 			for(Player pO : Bukkit.getOnlinePlayers()) {
-				if(!pO.hasPermission("example.vanish.see")) {
+				if(!pO.hasPermission("minecore.vanish.see")) {
 					pO.hidePlayer(plugin,p);
 				} else {
 					if(!(pO.getUniqueId() == p.getUniqueId())) {
@@ -51,7 +51,7 @@ public class Listener implements org.bukkit.event.Listener {
 		if(plugin.vanishedPlayers.contains(playerUUID)) {
 			e.quitMessage(null);
 			for(Player pO : Bukkit.getOnlinePlayers()) {
-				if(pO.hasPermission("example.vanish.see")) {
+				if(pO.hasPermission("minecore.vanish.see")) {
 					if(!(pO.getUniqueId() == p.getUniqueId())) {
 						pO.sendMessage(Component.text(p.getName() + " quit in vanish!",TextColor.color(0x636363)));
 					}

@@ -15,7 +15,7 @@ public class FlyCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
 			@NotNull String @NotNull [] args) {
-		if(!sender.hasPermission("example.fly")) {
+		if(!sender.hasPermission("minecore.fly")) {
 			sender.sendMessage(Component.text("You don't have permission to execute this command!",TextColor.color(0xe0523f)));
 			return false;
 		}
