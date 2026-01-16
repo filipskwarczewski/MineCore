@@ -4,10 +4,12 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -75,6 +77,15 @@ public class Listener implements org.bukkit.event.Listener {
 			Player p = e.getPlayer();
 			if(e.getItem().getType() == Material.FIRE_CHARGE) {
 				p.launchProjectile(Fireball.class);
+			}
+		}
+	}
+	@EventHandler
+	public void onDamage(EntityDamageEvent e) {
+		if(e.getEntityType() == EntityType.PLAYER) {
+			Player p = (Player) e.getEntity();
+			if(plugin.godMode.contains(p.getUniqueId())) {
+				e.setCancelled(true);
 			}
 		}
 	}

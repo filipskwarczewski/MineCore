@@ -13,6 +13,7 @@ import me.squishyslime.minecore.utils.RegisterCommands;
 public class Main extends JavaPlugin {
 	public HashSet<UUID> vanishedPlayers = new HashSet<>();
 	public HashSet<UUID> canPickup = new HashSet<>();
+	public HashSet<UUID> godMode = new HashSet<>();
 	
 	public EconomyManager em;
 	public RegisterCommands reg;

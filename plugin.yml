@@ -32,3 +32,13 @@ commands:
     description: Allows you to feed.
   repair:
     description: Allows you to repair all the items in your inventory.
+  workbench:
+    description: Allows you to open the crafting bench.
+    aliases:
+      - wb
+  enderchest:
+    description: Allows you to open your enderchest.
+    aliases:
+      - ec
+  god:
+    description: Allows you to turn on/off god mode!

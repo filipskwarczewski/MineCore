@@ -2,9 +2,9 @@
 /heal - done
 /feed - done
 /repair - done
-/workbench
-/enderchest
-/god
+/workbench - done
+/enderchest - done
+/god - done
 /ci
 /seen
 /tp
